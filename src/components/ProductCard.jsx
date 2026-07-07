@@ -5,9 +5,13 @@ function ProductCard({ product, onDelete }) {
   return (
     <div className="bg-white rounded-xl shadow-md p-4">
       <img
-        src={`http://localhost:5000${product.productImage}`}
+        src={
+          product.productImage
+            ? `${import.meta.env.VITE_API_URL}${product.productImage}`
+            : "https://placehold.co/600x400?text=No+Image"
+        }
         alt={product.productName}
-        className="w-full h-48 object-cover rounded-lg"
+        className="w-full h-56 object-cover"
       />
 
       <h2 className="text-xl font-bold mt-3">{product.productName}</h2>

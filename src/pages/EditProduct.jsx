@@ -40,7 +40,9 @@ function EditProduct() {
 
       setFormData(res.data.product);
 
-      setPreview(`http://localhost:5000${res.data.product.productImage}`);
+      setPreview(
+        `${import.meta.env.VITE_API_URL}${res.data.product.productImage}`,
+      );
     } catch (error) {
       toast.error("Failed to load product");
     }

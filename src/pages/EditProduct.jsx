@@ -57,6 +57,34 @@ function EditProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.productName.trim()) {
+      toast.error("Product name is required");
+      return;
+    }
+
+    if (!formData.category.trim()) {
+      toast.error("Category is required");
+      return;
+    }
+
+    if (Number(formData.price) <= 0) {
+      toast.error("Price must be greater than 0");
+      return;
+    }
+
+    if (Number(formData.stockQuantity) < 0) {
+      toast.error("Stock quantity cannot be negative");
+      return;
+    }
+
+    if (
+      formData.discountPercentage !== "" &&
+      (Number(formData.discountPercentage) < 0 ||
+        Number(formData.discountPercentage) > 100)
+    ) {
+      toast.error("Discount must be between 0 and 100");
+      return;
+    }
 
     try {
       const data = new FormData();

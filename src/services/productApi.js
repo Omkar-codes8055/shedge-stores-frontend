@@ -6,7 +6,6 @@ const API = axios.create({
   baseURL: `${API_URL}/api/products`,
 });
 
-// Automatically attach login token for Add, Edit, and Delete
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
@@ -17,7 +16,7 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-export const getProducts = () => API.get("/");
+export const getProducts = (params = {}) => API.get("/", { params });
 
 export const getProductById = (id) => API.get(`/${id}`);
 

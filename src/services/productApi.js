@@ -6,6 +6,17 @@ const API = axios.create({
   baseURL: `${API_URL}/api/products`,
 });
 
+// Automatically attach login token for Add, Edit, and Delete
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 export const getProducts = () => API.get("/");
 
 export const getProductById = (id) => API.get(`/${id}`);
